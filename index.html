@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>MeshFlow: Efficient Artistic Mesh Generation via MeshVAE and Flow-based Diffusion Transformer</title>
+    <meta content="MeshFlow: Efficient Artistic Mesh Generation via MeshVAE and Flow-based Diffusion Transformer" name="description" />
+    <meta content="summary" name="twitter:card" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&amp;family=Roboto:ital,wght@0,300;0,400;0,500;1,300;1,400&amp;family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&amp;family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400&amp;family=Open+Sans:ital,wght@0,300;0,400;0,600;0,700;1,400&amp;family=Noto+Sans:ital,wght@0,400;0,600;0,700;1,400&amp;family=Castoro&amp;family=Changa+One&amp;family=Varela+Round&amp;display=swap" />
+    <link rel="stylesheet" href="./static/css/index.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-MLDP9MKGC8"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-MLDP9MKGC8');
+    </script>
+</head>
+
+<body>
+    <nav class="meshflow-side-nav" aria-label="Page navigation">
+        <a href="#top" aria-label="Back to top"><i class="fa-solid fa-water" aria-hidden="true"></i></a>
+        <a href="#abstract">Abstract</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#method">Method</a>
+        <a href="#bibtex">BibTeX</a>
+    </nav>
+
+    <main>
+    <section class="meshflow-hero" id="top">
+        <div class="meshflow-page-wrap meshflow-hero-inner">
+            <p class="meshflow-venue-wrap meshflow-venue-hero" role="status">
+                <span class="meshflow-venue-badge">CVPR 2026 Highlight</span>
+            </p>
+            <header class="meshflow-title-block">
+                <h1 class="meshflow-h1">
+                    <span class="meshflow-title-line meshflow-title-line-1">
+                        <span class="meshflow-brand-word" aria-label="MeshFlow">
+                            <span class="meshflow-brand-letter" style="--m-i:0">M</span><span class="meshflow-brand-letter" style="--m-i:1">e</span><span class="meshflow-brand-letter" style="--m-i:2">s</span><span class="meshflow-brand-letter" style="--m-i:3">h</span><span class="meshflow-brand-letter" style="--m-i:4">F</span><span class="meshflow-brand-letter" style="--m-i:5">l</span><span class="meshflow-brand-letter" style="--m-i:6">o</span><span class="meshflow-brand-letter" style="--m-i:7">w</span>
+                        </span><span class="meshflow-title-punct">: </span><span class="meshflow-title-continuation">Efficient Artistic Mesh Generation</span>
+                    </span>
+                    <span class="meshflow-title-line meshflow-title-line-2">via MeshVAE and Flow-based Diffusion Transformer</span>
+                </h1>
+                <p class="meshflow-lead">
+                    <strong class="meshflow-lead-highlight">~1s</strong> parallel, quantization-free artistic mesh generation.
+                </p>
+            </header>
+            <div class="meshflow-hero-meta nerf_subheader_v2">
+                <div class="meshflow-authors">
+                    <a href="https://weiyuli.xyz/" target="_blank" class="nerf_authors_v2">Weiyu Li</a><sup> 1,2</sup>, 
+                    <a href="https://www.antoinetlc.com/" target="_blank" rel="noopener noreferrer" class="nerf_authors_v2">Antoine Toisoul</a><sup> 1</sup>, 
+                    <a href="https://tmonnier.com/" target="_blank" rel="noopener noreferrer" class="nerf_authors_v2">Tom Monnier</a><sup> 1</sup>, 
+                    <a href="https://shapovalov.ro/" target="_blank" rel="noopener noreferrer" class="nerf_authors_v2">Roman Shapovalov</a><sup> 1</sup>, 
+                    <a href="https://www.linkedin.com/in/rakesh-r-3848538" target="_blank" rel="noopener noreferrer" class="nerf_authors_v2">Rakesh Ranjan</a><sup> 1</sup>, 
+                    <span class="meshflow-authors-corresponding">
+                    <a href="https://ece.hkust.edu.hk/pingtan" target="_blank" class="nerf_authors_v2">Ping Tan</a><sup> 2†</sup>, 
+                    <a href="https://www.robots.ox.ac.uk/~vedaldi/" target="_blank" class="nerf_authors_v2">Andrea Vedaldi</a><sup> 1†</sup>
+                    </span>
+                </div>
+                <div class="meshflow-affiliations">
+                    <h1 class="nerf_affiliation_v2"><sup>1 </sup><span class="meshflow-meta-wordmark" aria-label="Meta AI"><i class="fa-brands fa-meta" aria-hidden="true"></i> Meta AI</span></h1>,
+                    <h1 class="nerf_affiliation_v2" title="The Hong Kong University of Science and Technology"><sup>2 </sup><span class="meshflow-affil-pair"><img class="meshflow-affil-logo meshflow-affil-logo--hkust" src="assets/images/HKUST_logo.png" alt="" width="91" height="120" decoding="async" /><span class="meshflow-affil-pair-text">HKUST</span></span></h1>
+                </div>
+
+                <div class="external-link meshflow-external-links" role="toolbar" aria-label="Paper, demo, and code links">
+                    <a class="btn meshflow-btn-disabled" href="#" role="button" aria-disabled="true">
+                        <i class="fa fa-file-pdf"></i> Paper(CVPR) </a>
+                    <a class="btn" href="#" role="button" style="opacity:0.55;pointer-events:none;" aria-disabled="true">
+                        <i class="ai ai-arxiv"></i> Paper(Arxiv) </a>
+                    <a class="btn meshflow-btn-gradio" href="https://huggingface.co/spaces/facebook/meshflow" role="button" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-laptop-code"></i> Gradio Demo </a>
+                    <a class="btn" href="https://github.com/facebookresearch/meshflow" role="button" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-brands fa-github"></i> Code </a>
+                    <a class="btn" href="https://huggingface.co/models/facebook/meshflow" role="button" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-cube"></i> Model </a>
+                </div>
+
+            </div>
+
+            <div class="meshflow-hero-stats" aria-label="MeshFlow headline results">
+                <div class="meshflow-stat">
+                    <strong>18x faster</strong>
+                    <span>than AR-style mesh generation</span>
+                </div>
+                <div class="meshflow-stat">
+                    <strong>Parallel</strong>
+                    <span>flow transformer denoising</span>
+                </div>
+                <div class="meshflow-stat">
+                    <strong>No quantization</strong>
+                    <span>continuous vertex coordinates</span>
+                </div>
+            </div>
+
+            <div class="meshflow-hero-media" aria-label="MeshFlow generation process">
+                <article class="meshflow-video-card">
+                    <div class="meshflow-video-caption">
+                        <span>Denoise process</span>
+                        <span>Generated mesh</span>
+                    </div>
+                    <div class="meshflow-video-frame">
+                        <video src="assets/media/denoise_teaser.mp4" autoplay muted loop playsinline preload="metadata"></video>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="meshflow-section meshflow-section-plain" id="abstract">
+        <div class="meshflow-page-wrap meshflow-narrow">
+            <header class="meshflow-section-head">
+                <p class="meshflow-eyebrow">Abstract</p>
+                <h2 class="grey-heading_nerf">Fast artistic mesh generation, without token-by-token decoding.</h2>
+            </header>
+            <p class="paragraph-3 nerf_text nerf_results_text meshflow-abstract-text">
+                We present <strong>MeshFlow</strong>, a method for generating artist-like 3D meshes with continuous geometry and explicit connectivity. Instead of autoregressively predicting discrete face tokens, MeshFlow learns a compact continuous latent space with MeshVAE and generates the latent mesh representation in parallel using a flow-based diffusion transformer. This avoids coordinate quantization, scales linearly with mesh size, and produces high-quality meshes for unconditional, point-cloud-conditioned, and image-conditioned generation.
+            </p>
+            <div class="meshflow-idea-grid" role="list" aria-label="MeshFlow key ideas">
+                <article class="meshflow-idea-card" role="listitem">
+                    <span class="meshflow-idea-icon"><i class="fa-solid fa-diagram-project" aria-hidden="true"></i></span>
+                    <h3>Continuous mesh latent</h3>
+                    <p>Positions, normals, and edge embeddings are compressed without discretizing vertex coordinates.</p>
+                </article>
+                <article class="meshflow-idea-card" role="listitem">
+                    <span class="meshflow-idea-icon"><i class="fa-solid fa-bolt" aria-hidden="true"></i></span>
+                    <h3>Parallel generation</h3>
+                    <p>A flow-based transformer denoises all latent tokens together instead of decoding one token at a time.</p>
+                </article>
+                <article class="meshflow-idea-card" role="listitem">
+                    <span class="meshflow-idea-icon"><i class="fa-solid fa-cube" aria-hidden="true"></i></span>
+                    <h3>Artist-like outputs</h3>
+                    <p>The decoded meshes keep explicit vertices and edges, making them suitable for downstream 3D workflows.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="meshflow-section meshflow-section-plain" id="gallery">
+        <div class="meshflow-page-wrap">
+            <header class="meshflow-section-head">
+                <p class="meshflow-eyebrow">Gallery</p>
+                <h2 class="grey-heading_nerf">Parallel generation turns noisy geometry into clean artist-like meshes.</h2>
+            </header>
+            <figure class="meshflow-teaser-figure">
+                <img src="assets/images/teaser.png" alt="MeshFlow teaser showing a mesh generation trajectory from noisy input to clean output, followed by diverse generated meshes.">
+            </figure>
+        </div>
+    </section>
+
+    <section class="meshflow-section meshflow-section-plain" id="method">
+        <div class="meshflow-page-wrap">
+            <div class="meshflow-method-intro">
+                <p class="meshflow-eyebrow">Method</p>
+                <h2 class="grey-heading_nerf">MeshVAE makes meshes compact; <span class="meshflow-nowrap">flow matching</span> makes generation fast.</h2>
+                <p class="paragraph-3 nerf_text">
+                    MeshFlow compresses a continuous vertex-based mesh representation into compact MeshVAE latents, then uses a flow-based transformer to generate all latent tokens in parallel before decoding explicit geometry and connectivity.
+                </p>
+            </div>
+            <div class="meshflow-method-scroller" aria-label="MeshFlow method cards">
+                <article class="meshflow-method-card">
+                    <div class="meshflow-method-card-copy">
+                        <span>Motivation</span>
+                        <h3>Vertices are more compact than faces.</h3>
+                        <p>A mesh with <em>n<sub>v</sub></em> vertices is represented by <em>n<sub>v</sub></em> continuous vectors. Because meshes usually have two to three times more faces than vertices, this representation is shorter than face-oriented tokenizers and avoids coordinate quantization.</p>
+                    </div>
+                    <button type="button" class="meshflow-method-image" aria-label="Open motivation figure">
+                        <img src="assets/images/data_statistics.png" alt="Plots showing vertices versus faces distribution and the impact of mesh coordinate quantization.">
+                    </button>
+                </article>
+                <article class="meshflow-method-card">
+                    <div class="meshflow-method-card-copy">
+                        <span>Method overview</span>
+                        <h3>Parallel flow generation from continuous latents.</h3>
+                        <p>MeshFlow encodes positions, normals, and edge features into MeshVAE latents. A flow-based diffusion transformer denoises these latents together, then the decoder recovers vertices, normals, and mesh connectivity.</p>
+                    </div>
+                    <button type="button" class="meshflow-method-image" aria-label="Open method overview figure">
+                        <img src="assets/images/method_overview.png" alt="Overview of the MeshFlow pipeline from mesh representation to MeshVAE latent generation and decoded meshes.">
+                    </button>
+                </article>
+                <article class="meshflow-method-card">
+                    <div class="meshflow-method-card-copy">
+                        <span>Detailed VAE</span>
+                        <h3>TokenMerge forms a more compact mesh latent.</h3>
+                        <p>Inspired by pixel shuffle, TokenMerge downsamples vertex tokens into fewer latent tokens. TokenSplit reverses this process, while attention blocks refine geometry, edge embeddings, and the validity mask.</p>
+                    </div>
+                    <button type="button" class="meshflow-method-image" aria-label="Open detailed VAE figure">
+                        <img src="assets/images/detailed_vae.png" alt="Detailed MeshVAE architecture with TokenMerge, TokenSplit, attention blocks, and latent code.">
+                    </button>
+                </article>
+                <article class="meshflow-method-card">
+                    <div class="meshflow-method-card-copy">
+                        <span>VAE comparisons</span>
+                        <h3>Continuous codes avoid quantization loss.</h3>
+                        <p>MeshVAE reconstructs meshes in continuous space with only 512 latent codes. Compared with quantized tokenizers, it preserves fine geometry and topology with far fewer variables.</p>
+                    </div>
+                    <button type="button" class="meshflow-method-image" aria-label="Open VAE comparison figure">
+                        <img src="assets/images/vae_comparisons.png" alt="VAE comparison between ground-truth mesh, MeshFlow reconstruction, and a quantized token baseline.">
+                    </button>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <section class="meshflow-section meshflow-section-muted">
+        <div class="meshflow-page-wrap">
+            <header class="meshflow-section-head">
+                <p class="meshflow-eyebrow">What matters</p>
+                <h2 class="grey-heading_nerf">Compact latents for fast mesh generation.</h2>
+            </header>
+            <div class="meshflow-highlights-block nerf_results_text">
+                <div class="meshflow-highlights-dots" role="list">
+                    <p class="paragraph-3 nerf_text meshflow-highlight-item" role="listitem">We introduce a <b>continuous mesh representation</b> that keeps vertex positions, outward normals, and connectivity on the vertices. Inspired by SpaceMesh, adjacency is encoded with contrastively learned edge embeddings instead of discrete face tokens.</p>
+                    <p class="paragraph-3 nerf_text meshflow-highlight-item" role="listitem">We design <b>MeshVAE</b> to map this representation into compact continuous latents. TokenMerge downsamples along vertices, reconstructs accurately with fewer variables, and avoids coordinate quantization.</p>
+                    <p class="paragraph-3 nerf_text meshflow-highlight-item" role="listitem">A <b>flow-based transformer</b> generates the latent mesh in parallel rather than autoregressively decoding tokens. Inference scales linearly with mesh size and runs significantly faster than strong AR baselines.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="meshflow-section meshflow-section-plain" id="acknowledgements">
+        <div class="meshflow-page-wrap meshflow-narrow">
+            <header class="meshflow-section-head">
+                <p class="meshflow-eyebrow">Acknowledgements</p>
+            </header>
+            <p class="paragraph-3 nerf_text meshflow-ack-text">
+                We are deeply grateful to Minghao Chen, Jianyuan Wang, Zihang Lai, and Thu Nguyen-Phuoc for their discussions and support. We also thank the authors of related mesh generation works, including <a href="https://arxiv.org/abs/2311.15475" target="_blank" rel="noopener noreferrer">MeshGPT</a>, <a href="https://arxiv.org/abs/2312.11417" target="_blank" rel="noopener noreferrer">PolyDiff</a>, <a href="https://arxiv.org/abs/2409.20562" target="_blank" rel="noopener noreferrer">SpaceMesh</a>, <a href="https://arxiv.org/abs/2503.23022" target="_blank" rel="noopener noreferrer">MeshCraft</a>, <a href="https://arxiv.org/abs/2508.19188" target="_blank" rel="noopener noreferrer">FastMesh</a>, <a href="https://arxiv.org/abs/2512.03052" target="_blank" rel="noopener noreferrer">LATTICE</a>, and <a href="https://arxiv.org/html/2603.06357v1" target="_blank" rel="noopener noreferrer">LATO</a>. This project page is also greatly inspired by the <a href="https://vggt-omega.github.io/" target="_blank" rel="noopener noreferrer">VGGT-Omega</a> project page; we sincerely thank them for their excellent work.
+            </p>
+        </div>
+    </section>
+
+    <section class="meshflow-section meshflow-section-plain" id="bibtex">
+    <div class="meshflow-page-wrap meshflow-narrow">
+        <h2 class="grey-heading_nerf meshflow-bibtex-heading">BibTeX
+            <button type="button" class="meshflow-bibtex-copy" id="meshflow-bibtex-copy-btn" aria-label="Copy BibTeX to clipboard" title="Copy BibTeX">
+                <i class="fa-solid fa-copy" aria-hidden="true"></i>
+            </button>
+        </h2>
+        <div class="meshflow-bibtex-wrap">
+            <div class="bibtex">
+                <pre><code id="meshflow-bibtex-content">@inproceedings{li2026meshflow,
+  author    = {Weiyu Li and Antoine Toisoul and Tom Monnier and Roman Shapovalov and Rakesh Ranjan and Ping Tan and Andrea Vedaldi},
+  title     = {{MeshFlow}: Efficient Artistic Mesh Generation via MeshVAE and Flow-based Diffusion Transformer},
+  booktitle = {Proceedings of the {IEEE/CVF} Conference on Computer Vision and Pattern Recognition ({CVPR})},
+  year      = {2026},
+  note      = {Highlight},
+}</code></pre>
+            </div>
+        </div>
+    </div>
+    </section>
+    </main>
+
+    <footer class="meshflow-footer">
+        <span>MeshFlow: Efficient Artistic Mesh Generation via MeshVAE and Flow-based Diffusion Transformer · CVPR 2026 Highlight</span>
+        <nav aria-label="Footer links">
+            <a href="#" aria-disabled="true">Paper(CVPR)</a>
+            <a href="#" aria-disabled="true">Paper(Arxiv)</a>
+            <a href="https://huggingface.co/spaces/facebook/meshflow" target="_blank" rel="noopener noreferrer">Demo</a>
+        </nav>
+    </footer>
+    <div class="meshflow-lightbox" id="meshflow-lightbox" aria-hidden="true">
+        <button type="button" class="meshflow-lightbox-close" aria-label="Close image preview">&times;</button>
+        <img src="" alt="">
+    </div>
+    <script>
+    (function () {
+        var btn = document.getElementById("meshflow-bibtex-copy-btn");
+        var code = document.getElementById("meshflow-bibtex-content");
+        if (!btn || !code) return;
+        var icon = btn.querySelector("i");
+        var originalLabel = btn.getAttribute("aria-label");
+        var t = null;
+        function feedback(ok) {
+            btn.setAttribute("aria-label", ok ? "Copied" : "Copy failed");
+            if (icon) {
+                icon.className = ok ? "fa-solid fa-check" : "fa-solid fa-copy";
+            }
+            clearTimeout(t);
+            t = setTimeout(function () {
+                btn.setAttribute("aria-label", originalLabel);
+                if (icon) icon.className = "fa-solid fa-copy";
+            }, 2000);
+        }
+        btn.addEventListener("click", function () {
+            var text = code.textContent || "";
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(function () { feedback(true); }).catch(function () { fallbackCopy(); });
+            } else {
+                fallbackCopy();
+            }
+            function fallbackCopy() {
+                try {
+                    var range = document.createRange();
+                    range.selectNodeContents(code);
+                    var sel = window.getSelection();
+                    sel.removeAllRanges();
+                    sel.addRange(range);
+                    document.execCommand("copy");
+                    sel.removeAllRanges();
+                    feedback(true);
+                } catch (e) {
+                    feedback(false);
+                }
+            }
+        });
+    })();
+    (function () {
+        var lightbox = document.getElementById("meshflow-lightbox");
+        if (!lightbox) return;
+        var preview = lightbox.querySelector("img");
+        var closeBtn = lightbox.querySelector(".meshflow-lightbox-close");
+        var lastTrigger = null;
+
+        function closePreview() {
+            lightbox.classList.remove("is-open");
+            lightbox.setAttribute("aria-hidden", "true");
+            if (preview) {
+                preview.removeAttribute("src");
+                preview.removeAttribute("alt");
+            }
+            if (lastTrigger) lastTrigger.focus();
+        }
+
+        document.querySelectorAll(".meshflow-method-image").forEach(function (trigger) {
+            trigger.addEventListener("click", function () {
+                var img = trigger.querySelector("img");
+                if (!img || !preview) return;
+                lastTrigger = trigger;
+                preview.src = img.currentSrc || img.src;
+                preview.alt = img.alt || "MeshFlow method figure";
+                lightbox.classList.add("is-open");
+                lightbox.setAttribute("aria-hidden", "false");
+                if (closeBtn) closeBtn.focus();
+            });
+        });
+
+        lightbox.addEventListener("click", function (event) {
+            if (event.target === lightbox) closePreview();
+        });
+        if (closeBtn) closeBtn.addEventListener("click", closePreview);
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Escape" && lightbox.classList.contains("is-open")) closePreview();
+        });
+    })();
+    </script>
+</body>
+</html>
