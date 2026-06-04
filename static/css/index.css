@@ -1,0 +1,1275 @@
+:root {
+  --meshflow-ink: #0f2433;
+  --meshflow-muted: #526b7a;
+  --meshflow-soft: #f2f9fc;
+  --meshflow-panel: #ffffff;
+  --meshflow-line: #cfe2ec;
+  --meshflow-cyan: #0891b2;
+  --meshflow-ocean: #036987;
+  --meshflow-shadow: 0 16px 40px rgba(17, 24, 39, 0.07);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100%;
+  margin: 0;
+  color: var(--meshflow-ink);
+  background: #fff;
+  font-family: "Noto Sans", Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+body h1,
+body h2,
+body h3,
+body p {
+  letter-spacing: 0;
+}
+
+a {
+  color: var(--meshflow-ocean);
+  text-decoration: none;
+}
+
+a:hover {
+  color: #075985;
+  text-decoration: underline;
+}
+
+img,
+video {
+  max-width: 100%;
+}
+
+button {
+  font: inherit;
+}
+
+sup {
+  position: relative;
+  top: -0.45em;
+  font-size: 66%;
+  line-height: 0;
+  vertical-align: baseline;
+}
+
+.meshflow-page-wrap {
+  width: min(1120px, calc(100% - 40px));
+  margin: 0 auto;
+}
+
+.meshflow-narrow {
+  width: min(920px, calc(100% - 40px));
+}
+
+.meshflow-side-nav {
+  position: fixed;
+  top: 50%;
+  right: clamp(0.35rem, 1.2vw, 1rem);
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.4rem;
+  padding: 0.45rem;
+  border: 1px solid rgba(203, 213, 225, 0.85);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: 0 16px 38px rgba(7, 89, 133, 0.14);
+  backdrop-filter: blur(14px);
+  transform: translateY(-50%);
+}
+
+.meshflow-side-nav a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 2.2rem;
+  min-height: 2.2rem;
+  padding: 0.55rem 0.7rem;
+  border-radius: 999px;
+  color: #475569;
+  font-size: 0.7rem;
+  font-weight: 800;
+  line-height: 1.15;
+  text-align: center;
+  text-decoration: none;
+  transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease;
+}
+
+.meshflow-side-nav a:first-child {
+  color: #0f8fb3;
+  font-size: 0.95rem;
+}
+
+.meshflow-side-nav a:hover {
+  background: #e7f8fb;
+  color: #075985;
+  transform: translateY(-1px);
+}
+
+.meshflow-hero {
+  padding: clamp(2.2rem, 5vw, 4.5rem) 0 clamp(2.5rem, 5vw, 4.25rem);
+  border-bottom: 1px solid var(--meshflow-line);
+  background:
+    radial-gradient(circle at 50% 0%, rgba(125, 211, 252, 0.18), transparent 34rem),
+    linear-gradient(180deg, #f5fbfe 0%, #ffffff 72%);
+}
+
+.meshflow-hero-inner,
+.meshflow-section-head,
+.meshflow-method-intro {
+  text-align: center;
+}
+
+.meshflow-venue-hero {
+  margin: 0 0 1.1rem;
+}
+
+.meshflow-venue-badge {
+  display: inline-flex;
+  padding: 0.38rem 0.86rem;
+  border: 1px solid #f2c75c;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #fff8d8 0%, #ffe89a 100%);
+  box-shadow: 0 4px 14px rgba(199, 143, 17, 0.13);
+  color: #8a5b08;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+}
+
+.meshflow-title-block {
+  max-width: 960px;
+  margin: 0 auto 1rem;
+  padding: 0;
+}
+
+.meshflow-h1 {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  color: var(--meshflow-ink);
+  font-family: Ubuntu, Helvetica, sans-serif;
+  font-weight: 650;
+  line-height: 1.08;
+}
+
+.meshflow-title-line {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.meshflow-title-line-1 {
+  font-size: clamp(2.05rem, 4.85vw, 3.85rem);
+  font-weight: 650;
+  line-height: 1.05;
+  overflow-wrap: anywhere;
+}
+
+.meshflow-title-line-2 {
+  max-width: 900px;
+  margin-top: 0.42rem;
+  color: #303846;
+  font-size: clamp(1.18rem, 2.25vw, 1.72rem);
+  font-weight: 560;
+  line-height: 1.22;
+  overflow-wrap: anywhere;
+}
+
+.meshflow-title-punct,
+.meshflow-title-continuation {
+  color: var(--meshflow-ink);
+  font-weight: 650;
+}
+
+.meshflow-nowrap {
+  white-space: nowrap;
+}
+
+.meshflow-brand-word {
+  display: inline-flex;
+  align-items: baseline;
+  font-weight: 700;
+  letter-spacing: 0;
+  white-space: nowrap;
+}
+
+.meshflow-brand-letter {
+  display: inline-block;
+  background-image: linear-gradient(
+    100deg,
+    #042f4b 0%,
+    #075985 14%,
+    #0284c7 28%,
+    #06b6d4 42%,
+    #67e8f9 52%,
+    #f0fdff 58%,
+    #38bdf8 66%,
+    #0e7490 82%,
+    #083344 100%
+  );
+  background-size: 260% 100%;
+  background-position: 0% 50%;
+  background-attachment: fixed;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  animation: meshflow-brand-flow 5.5s ease-in-out infinite alternate,
+    meshflow-letter-wave 2.35s ease-in-out infinite;
+  animation-delay: 0s, calc(var(--m-i, 0) * 0.065s);
+}
+
+@keyframes meshflow-brand-flow {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 100% 50%; }
+}
+
+@keyframes meshflow-letter-wave {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-0.12em); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .meshflow-brand-letter {
+    animation: none;
+    transform: none;
+    background: none;
+    color: #0369a1;
+    -webkit-text-fill-color: unset;
+  }
+}
+
+.meshflow-lead {
+  max-width: 720px;
+  margin: 0.9rem auto 0;
+  color: var(--meshflow-muted);
+  font-size: clamp(0.98rem, 1.55vw, 1.1rem);
+  font-weight: 450;
+  line-height: 1.5;
+}
+
+.meshflow-lead-highlight {
+  color: var(--meshflow-ocean);
+  font-weight: 800;
+}
+
+.meshflow-hero-meta {
+  max-width: 980px;
+  margin: 1.18rem auto 0;
+  color: #254456;
+  font-size: clamp(1.02rem, 1.28vw, 1.14rem);
+  font-weight: 500;
+  line-height: 1.58;
+}
+
+.meshflow-authors {
+  margin-bottom: 0.55rem;
+  overflow-wrap: anywhere;
+}
+
+.meshflow-authors-corresponding {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.nerf_authors_v2 {
+  color: #036987;
+  font-weight: 750;
+}
+
+.meshflow-affiliations,
+.nerf_affiliation_v2 {
+  display: inline;
+  margin: 0;
+  color: #526b7a;
+  font: inherit;
+  font-size: clamp(0.98rem, 1.12vw, 1.06rem);
+  font-weight: 550;
+}
+
+.meshflow-affil-pair,
+.meshflow-meta-wordmark {
+  display: inline-flex;
+  align-items: baseline;
+}
+
+.meshflow-affil-pair {
+  gap: 0.22em;
+}
+
+.meshflow-affil-logo--hkust {
+  width: auto;
+  height: 1.05em;
+  margin: 0;
+  object-fit: contain;
+  vertical-align: -0.12em;
+}
+
+.meshflow-meta-wordmark {
+  gap: 0.28em;
+  color: #526b7a;
+  font-weight: inherit;
+}
+
+.meshflow-meta-wordmark i {
+  color: #0668e1;
+  font-size: 0.95em;
+  line-height: 1;
+}
+
+.meshflow-links-block {
+  margin-top: 1.25rem;
+}
+
+.meshflow-links-note {
+  max-width: 36rem;
+  margin: 0.75rem auto 0;
+  padding: 0 0.5rem;
+  color: #e6ad1a;
+  font-size: 0.88rem;
+  font-style: italic;
+  font-weight: 550;
+  line-height: 1.55;
+  text-align: center;
+}
+
+.external-link,
+.meshflow-external-links {
+  display: flex;
+  justify-content: center;
+  margin-top: 0;
+  padding: 0;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  min-height: 2.55rem;
+  padding: 0.55rem 0.95rem;
+  border: 1px solid #cfd6df;
+  border-radius: 999px;
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(17, 24, 39, 0.05);
+  color: #172033;
+  font-size: 0.95rem;
+  font-weight: 700;
+  line-height: 1;
+  text-decoration: none;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+
+.btn:hover,
+.btn:focus-visible {
+  border-color: #075985;
+  background: #075985;
+  color: #fff;
+  text-decoration: none;
+  transform: translateY(-1px);
+  box-shadow: 0 10px 22px rgba(7, 89, 133, 0.18);
+}
+
+.btn:focus-visible {
+  outline: 3px solid rgba(14, 165, 233, 0.26);
+  outline-offset: 3px;
+}
+
+.meshflow-btn-disabled,
+.btn[aria-disabled="true"] {
+  cursor: not-allowed;
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.meshflow-hero-stats {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0.9rem;
+  max-width: 900px;
+  margin: clamp(1.8rem, 4vw, 2.8rem) auto 0;
+}
+
+.meshflow-stat,
+.meshflow-idea-card {
+  border: 1px solid var(--meshflow-line);
+  border-radius: 8px;
+  background: var(--meshflow-panel);
+  box-shadow: 0 10px 28px rgba(17, 24, 39, 0.055);
+}
+
+.meshflow-stat {
+  padding: 1.05rem 1rem;
+  text-align: left;
+}
+
+.meshflow-stat strong {
+  display: block;
+  color: #172033;
+  font-family: Ubuntu, Helvetica, sans-serif;
+  font-size: clamp(1.35rem, 2.8vw, 1.85rem);
+  line-height: 1.1;
+}
+
+.meshflow-stat span {
+  display: block;
+  margin-top: 0.4rem;
+  color: var(--meshflow-muted);
+  font-size: 0.9rem;
+  line-height: 1.35;
+}
+
+.meshflow-hero-media {
+  max-width: 960px;
+  margin: clamp(0.35rem, 1.2vw, 0.75rem) auto clamp(-0.85rem, -1.35vw, -0.35rem);
+}
+
+.meshflow-video-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: visible;
+  background: transparent;
+  text-align: center;
+}
+
+.meshflow-video-frame {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.meshflow-video-caption {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: center;
+  width: 100%;
+  margin: 0 auto 0.28rem;
+  padding: 0 clamp(0.2rem, 2vw, 1rem);
+  gap: clamp(0.8rem, 5vw, 3rem);
+}
+
+.meshflow-video-caption span {
+  justify-self: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: min(100%, 10.5rem);
+  padding: 0.34rem 0.9rem;
+  border: 1px solid rgba(14, 165, 233, 0.5);
+  border-radius: 999px;
+  background: linear-gradient(180deg, #f1fbff 0%, #e6f7ff 100%);
+  color: #036987;
+  font-size: 0.86rem;
+  font-weight: 800;
+  line-height: 1.2;
+  box-shadow: 0 8px 18px rgba(7, 89, 133, 0.08);
+}
+
+.meshflow-video-frame video {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+  transform-origin: center center;
+}
+
+.meshflow-section {
+  padding: clamp(2.8rem, 6vw, 4.5rem) 0;
+}
+
+.meshflow-section-muted {
+  border-top: 1px solid var(--meshflow-line);
+  border-bottom: 1px solid var(--meshflow-line);
+  background: var(--meshflow-soft);
+}
+
+.meshflow-eyebrow {
+  margin: 0 0 0.55rem;
+  color: var(--meshflow-ocean);
+  font-size: 0.78rem;
+  font-weight: 850;
+  letter-spacing: 0.12em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.grey-heading_nerf {
+  margin: 0 auto 1rem;
+  color: var(--meshflow-ink);
+  font-family: Ubuntu, Helvetica, sans-serif;
+  font-size: clamp(1.75rem, 3.3vw, 2.55rem);
+  font-weight: 700;
+  line-height: 1.14;
+  text-align: center;
+}
+
+.paragraph-3.nerf_text {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0;
+  color: #3f4755;
+  font-size: 1.02rem;
+  font-weight: 430;
+  line-height: 1.78;
+  text-align: left;
+}
+
+.meshflow-abstract-text {
+  text-align: center !important;
+}
+
+.meshflow-idea-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1.6rem;
+}
+
+.meshflow-idea-card {
+  padding: 1.15rem;
+  text-align: left;
+}
+
+.meshflow-idea-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  margin-bottom: 0.8rem;
+  border-radius: 8px;
+  background: #e0f7ff;
+  color: #075985;
+}
+
+.meshflow-idea-card:nth-child(2) .meshflow-idea-icon {
+  background: #eafaff;
+  color: #0284c7;
+}
+
+.meshflow-idea-card:nth-child(3) .meshflow-idea-icon {
+  background: #eef7ff;
+  color: #0369a1;
+}
+
+.meshflow-idea-card h3 {
+  margin: 0 0 0.45rem;
+  color: #172033;
+  font-family: Ubuntu, Helvetica, sans-serif;
+  font-size: 1.08rem;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.meshflow-idea-card p {
+  margin: 0;
+  color: var(--meshflow-muted);
+  font-size: 0.93rem;
+  font-weight: 430;
+  line-height: 1.55;
+}
+
+.meshflow-gallery-block {
+  margin: 1.35rem auto 0;
+  border: 1px solid var(--meshflow-line);
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: var(--meshflow-shadow);
+  overflow: hidden;
+}
+
+.meshflow-gallery-block:focus-visible {
+  outline: 3px solid rgba(14, 165, 233, 0.28);
+  outline-offset: 3px;
+}
+
+.meshflow-gallery-labels {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.75rem;
+  padding: 0.85rem clamp(0.75rem, 2vw, 1.1rem) 0.55rem;
+}
+
+.meshflow-gallery-labels span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2rem;
+  padding: 0.35rem 0.85rem;
+  border: 1px solid rgba(14, 165, 233, 0.45);
+  border-radius: 999px;
+  background: linear-gradient(180deg, #f1fbff 0%, #e6f7ff 100%);
+  color: #036987;
+  font-size: 0.84rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.meshflow-gallery-labels span:first-child {
+  color: #3f4755;
+}
+
+.meshflow-gallery-viewports {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0;
+  min-height: clamp(280px, 42vw, 420px);
+  border-top: 1px solid var(--meshflow-line);
+  border-bottom: 1px solid var(--meshflow-line);
+}
+
+.meshflow-gallery-viewport {
+  position: relative;
+  height: clamp(280px, 42vw, 420px);
+  background: linear-gradient(180deg, #f8fcfe 0%, #eef7fb 100%);
+}
+
+.meshflow-gallery-block--lazy .meshflow-gallery-viewport::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    110deg,
+    rgba(248, 252, 254, 0.35) 8%,
+    rgba(224, 242, 250, 0.9) 18%,
+    rgba(248, 252, 254, 0.35) 33%
+  );
+  background-size: 200% 100%;
+  animation: meshflow-gallery-shimmer 1.35s ease-in-out infinite;
+}
+
+.meshflow-gallery-block.is-booting .meshflow-gallery-viewport::before,
+.meshflow-gallery-viewport.is-loading .meshflow-gallery-loader {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.meshflow-gallery-loader {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(248, 252, 254, 0.72);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.18s ease;
+  backdrop-filter: blur(2px);
+}
+
+.meshflow-gallery-spinner {
+  width: 1.7rem;
+  height: 1.7rem;
+  border: 2px solid #cfe2ec;
+  border-top-color: #0891b2;
+  border-radius: 50%;
+  animation: meshflow-gallery-spin 0.8s linear infinite;
+}
+
+@keyframes meshflow-gallery-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes meshflow-gallery-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.meshflow-gallery-stats {
+  position: absolute;
+  top: 0.55rem;
+  right: 0.55rem;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.18rem;
+  padding: 0.38rem 0.55rem;
+  border: 1px solid rgba(14, 165, 233, 0.28);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: 0 6px 16px rgba(7, 89, 133, 0.08);
+  color: #475569;
+  font-size: 0.72rem;
+  font-weight: 600;
+  line-height: 1.25;
+  pointer-events: none;
+  backdrop-filter: blur(8px);
+}
+
+.meshflow-gallery-stats strong {
+  color: #0f2433;
+  font-weight: 800;
+}
+
+.meshflow-gallery-viewport + .meshflow-gallery-viewport {
+  border-left: 1px solid var(--meshflow-line);
+}
+
+.meshflow-gallery-viewport canvas {
+  display: block;
+  width: 100% !important;
+  height: 100% !important;
+  cursor: grab;
+}
+
+.meshflow-gallery-viewport canvas:active {
+  cursor: grabbing;
+}
+
+.meshflow-gallery-footer {
+  border-top: 1px solid var(--meshflow-line);
+  background: linear-gradient(180deg, #fbfeff 0%, #f3f9fc 100%);
+}
+
+.meshflow-gallery-toolbar {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.85rem clamp(0.85rem, 2vw, 1.2rem);
+}
+
+.meshflow-gallery-nav-cluster {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.meshflow-gallery-nav-cluster:first-child {
+  justify-self: start;
+}
+
+.meshflow-gallery-nav-cluster:last-child {
+  justify-self: end;
+}
+
+.meshflow-gallery-nav-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.38rem;
+  min-width: 2.45rem;
+  height: 2.45rem;
+  padding: 0 0.8rem;
+  border: 1px solid #b9dcee;
+  border-radius: 999px;
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(7, 89, 133, 0.06);
+  color: #075985;
+  font-size: 0.78rem;
+  font-weight: 800;
+  line-height: 1;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.meshflow-gallery-nav-btn span {
+  letter-spacing: 0.02em;
+}
+
+.meshflow-gallery-nav-btn:hover:not(:disabled) {
+  border-color: #7ec8e3;
+  background: #e8f7fb;
+  box-shadow: 0 8px 18px rgba(7, 89, 133, 0.1);
+  transform: translateY(-1px);
+}
+
+.meshflow-gallery-nav-btn:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.meshflow-gallery-nav-btn:disabled {
+  opacity: 0.42;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.meshflow-gallery-status {
+  display: block;
+  min-height: 0;
+  padding: 0 1rem;
+  color: #64748b;
+  font-size: 0.76rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.meshflow-gallery-status:empty {
+  display: none;
+}
+
+.meshflow-gallery-picker {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.4rem;
+  min-width: 0;
+  padding: 0 0.15rem;
+}
+
+.meshflow-gallery-picker--30x2 {
+  display: grid;
+  grid-template-columns: repeat(30, auto);
+  justify-content: center;
+  row-gap: 0.38rem;
+  column-gap: 0.34rem;
+}
+
+.meshflow-gallery-picker-btn {
+  width: 0.72rem;
+  height: 0.72rem;
+  padding: 0;
+  border: 1px solid #9bd3e8;
+  border-radius: 999px;
+  background: #e8f7fb;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.meshflow-gallery-picker-btn:hover {
+  transform: scale(1.15);
+  border-color: #0891b2;
+  box-shadow: 0 0 0 3px rgba(8, 145, 178, 0.12);
+}
+
+.meshflow-gallery-picker-btn.is-active {
+  background: #0891b2;
+  border-color: #036987;
+  box-shadow: 0 0 0 3px rgba(8, 145, 178, 0.18);
+  transform: scale(1.2);
+}
+
+.meshflow-gallery-hint {
+  margin: 0;
+  padding: 0.75rem 1rem 0.35rem;
+  color: #64748b;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-align: center;
+}
+
+.meshflow-gallery-hint-arrows {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.28rem;
+  margin: 0 0.12rem;
+  color: #075985;
+  font-size: 0.72rem;
+  vertical-align: 0.05em;
+}
+
+.meshflow-method-intro {
+  max-width: 920px;
+  margin: 0 auto;
+}
+
+.meshflow-method-scroller {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.6rem;
+  padding: 0.15rem 0 1rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-color: #93c5d8 #e8f6fb;
+}
+
+.meshflow-method-card {
+  flex: 0 0 min(86vw, 860px);
+  display: grid;
+  grid-template-columns: minmax(260px, 0.36fr) minmax(0, 0.64fr);
+  gap: 1rem;
+  align-items: center;
+  overflow: hidden;
+  border: 1px solid var(--meshflow-line);
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: var(--meshflow-shadow);
+  scroll-snap-align: start;
+}
+
+.meshflow-method-card-copy {
+  padding: 1.25rem 0 1.25rem 1.25rem;
+  text-align: left;
+}
+
+.meshflow-method-card-copy span {
+  display: inline-block;
+  margin-bottom: 0.45rem;
+  color: var(--meshflow-ocean);
+  font-size: 0.76rem;
+  font-weight: 850;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.meshflow-method-card-copy h3 {
+  margin: 0 0 0.6rem;
+  max-width: 15.5rem;
+  color: var(--meshflow-ink);
+  font-family: Ubuntu, Helvetica, sans-serif;
+  font-size: clamp(1.15rem, 2vw, 1.55rem);
+  font-weight: 750;
+  line-height: 1.18;
+}
+
+.meshflow-method-card-copy p {
+  margin: 0;
+  max-width: 15.5rem;
+  color: var(--meshflow-muted);
+  font-size: 0.94rem;
+  line-height: 1.58;
+}
+
+.meshflow-method-image {
+  display: block;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-left: 1px solid var(--meshflow-line);
+  background: #fff;
+  cursor: zoom-in;
+}
+
+.meshflow-method-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0;
+  transition: transform 0.18s ease, filter 0.18s ease;
+}
+
+.meshflow-method-image:hover img,
+.meshflow-method-image:focus-visible img {
+  filter: saturate(1.04);
+  transform: scale(1.01);
+}
+
+.meshflow-method-image:focus-visible {
+  outline: 3px solid rgba(14, 165, 233, 0.35);
+  outline-offset: -3px;
+}
+
+.meshflow-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1rem, 4vw, 3rem);
+  background: rgba(8, 22, 34, 0.72);
+  backdrop-filter: blur(10px);
+}
+
+.meshflow-lightbox.is-open {
+  display: flex;
+}
+
+.meshflow-lightbox img {
+  display: block;
+  max-width: min(96vw, 1280px);
+  max-height: 88vh;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.28);
+}
+
+.meshflow-lightbox-close {
+  position: fixed;
+  top: clamp(0.8rem, 2vw, 1.3rem);
+  right: clamp(0.8rem, 2vw, 1.3rem);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.35rem;
+  height: 2.35rem;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.92);
+  color: #075985;
+  font-size: 1.3rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.meshflow-highlights-block.nerf_results_text {
+  max-width: 930px;
+  margin: 1.35rem auto 0;
+  padding: 0;
+}
+
+.meshflow-highlights-dots {
+  display: grid;
+  gap: 0.85rem;
+}
+
+.meshflow-highlight-item {
+  position: relative;
+  margin: 0;
+  padding: 1rem 1rem 1rem 2.35rem !important;
+  border: 1px solid var(--meshflow-line);
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 8px 20px rgba(17, 24, 39, 0.045);
+}
+
+.meshflow-highlight-item::before {
+  position: absolute;
+  left: 1rem;
+  top: 1.55rem;
+  content: "";
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 999px;
+  background: var(--meshflow-cyan);
+}
+
+.meshflow-ack-text {
+  text-align: left !important;
+}
+
+.meshflow-bibtex-heading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.meshflow-bibtex-copy {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.72rem;
+  height: 1.72rem;
+  border: 1px solid var(--meshflow-line);
+  border-radius: 999px;
+  background: #f1f5f9;
+  color: #075985;
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, transform 0.15s ease;
+}
+
+.meshflow-bibtex-copy:hover {
+  border-color: #9bd3e8;
+  background: #e8f7fb;
+  transform: translateY(-1px);
+}
+
+.meshflow-bibtex-wrap .bibtex {
+  margin-top: 1rem;
+  border: 1px solid var(--meshflow-line);
+  border-radius: 8px;
+  background: #f8fcfe;
+  color: #1e3a4a;
+  box-shadow: var(--meshflow-shadow);
+  text-align: left;
+  overflow-x: auto;
+}
+
+.meshflow-bibtex-wrap .bibtex pre {
+  margin: 0;
+  padding: 1.1rem;
+  font: 0.92rem/1.55 ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  white-space: pre;
+}
+
+.meshflow-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 2rem max(2rem, calc((100vw - 1120px) / 2));
+  background: #111827;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: clamp(0.82rem, 1.05vw, 0.95rem);
+  line-height: 1.5;
+  text-align: left;
+}
+
+.meshflow-footer nav {
+  display: flex;
+  align-items: center;
+  gap: 1.35rem;
+  flex-shrink: 0;
+}
+
+.meshflow-footer a {
+  color: #fff;
+  font-weight: 800;
+}
+
+.meshflow-footer a:hover {
+  color: #7dd3fc;
+  text-decoration: none;
+}
+
+.meshflow-footer a[aria-disabled="true"] {
+  opacity: 0.72;
+  pointer-events: none;
+}
+
+@media (max-width: 1180px) {
+  .meshflow-side-nav {
+    display: none;
+  }
+}
+
+@media (max-width: 900px) {
+  .meshflow-gallery-viewports,
+  .meshflow-gallery-labels {
+    grid-template-columns: 1fr;
+  }
+
+  .meshflow-gallery-viewport + .meshflow-gallery-viewport {
+    border-left: none;
+    border-top: 1px solid var(--meshflow-line);
+  }
+
+  .meshflow-gallery-toolbar {
+    grid-template-columns: auto 1fr auto;
+    gap: 0.45rem;
+    padding: 0.75rem 0.65rem;
+  }
+
+  .meshflow-gallery-nav-btn span {
+    display: none;
+  }
+
+  .meshflow-gallery-picker--30x2 {
+    grid-template-columns: repeat(15, auto);
+  }
+
+  .meshflow-hero-stats,
+  .meshflow-idea-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .meshflow-method-card {
+    flex-basis: min(88vw, 720px);
+    grid-template-columns: 1fr;
+    align-items: stretch;
+  }
+
+  .meshflow-method-card-copy {
+    padding: 1.15rem;
+  }
+
+  .meshflow-method-card-copy h3,
+  .meshflow-method-card-copy p {
+    max-width: none;
+  }
+
+  .meshflow-method-image {
+    border-left: none;
+    border-top: 1px solid var(--meshflow-line);
+  }
+
+  .meshflow-footer {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1.6rem 1.25rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .meshflow-page-wrap,
+  .meshflow-narrow {
+    width: min(100% - 24px, 1120px);
+  }
+
+  .meshflow-title-line-1 {
+    display: block;
+    width: 100%;
+    font-size: clamp(1.95rem, 8.8vw, 2.8rem);
+  }
+
+  .meshflow-title-continuation {
+    display: block;
+    width: min(100%, 310px);
+    margin: 0.2rem auto 0;
+    font-size: 0.54em;
+    line-height: 1.16;
+    overflow-wrap: normal;
+  }
+
+  .meshflow-title-line-2 {
+    width: min(100%, 300px);
+    max-width: 300px;
+    font-size: 1.06rem;
+    line-height: 1.22;
+  }
+
+  .meshflow-lead {
+    max-width: 300px;
+    font-size: 0.94rem;
+  }
+
+  .meshflow-authors,
+  .meshflow-hero-meta {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  .meshflow-affiliations,
+  .nerf_affiliation_v2 {
+    font-size: 0.94rem;
+  }
+
+  .meshflow-authors {
+    max-width: 310px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .meshflow-external-links {
+    max-width: 320px;
+  }
+
+  .meshflow-external-links .btn[aria-disabled="true"]:not(.meshflow-btn-disabled) {
+    display: none;
+  }
+
+  .meshflow-hero {
+    padding-top: 1.8rem;
+  }
+
+  .meshflow-external-links .btn {
+    min-height: 2.35rem;
+    padding: 0.5rem 0.78rem;
+    font-size: 0.84rem;
+  }
+
+  .paragraph-3.nerf_text {
+    font-size: 0.96rem;
+    line-height: 1.68;
+  }
+}
